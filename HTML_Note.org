@@ -1,0 +1,700 @@
+#+TITLE: HTML Note:
+
+* How to master HTML basic?
+** HTML Basic Knowledge
+*** HTML 标签
+1. <> 标识符
+2. 通常标签是成对出现的
+3. HTML Tag
+4. 标签开始是开始标签，第二个标签是结束标签
+5. 开始和结束标签也被称为开放标签和闭合标签
+
+*** HTML 文档类型 = 网页
+1. 以<!DOCTYPE)声明其饮用类型 DTD(文档类型定义），规定了标记语言的规则
+2. 好几种 DOCTYPE，每种都会声明使用的 HTML 是严格形还是过渡性模式
+#+begin_src html
+<!DOCTYPE html>
+<html lang = 'en'>
+<head>
+<meta charset = "UTF-8">
+<title>Title</title>
+</head>
+<body>
+<hr />
+<h1>haha</h1>
+</body>
+</html>
+#+end_src
+3. <html> 与</html>之间的文本描述网页
+4. <body> 与</body>之间的文本是可见的页面内容
+5. <h1>与</h1>之间的文本被显示为标题， <h1> ~ <h5> 是分成 5 个层级的标题
+6. <p>与</p>之间的文本被显示为段落
+7. lang 属性只有 h5 里面有，zh 表示中文
+8. html 可以直接打印出来
+9. Pycharm 也可以作为 html 的工具
+
+*** HTML 元素
+1. HTML 的元素是指从开始标签到结束标签的所有代码（tag)
+2. 有些 HTML 没有内容，称为空元素例如<br/> 换行
+3. 大多数 HTML 元素都可拥有属性和嵌套
+4. 尽量不要发生没有意义的空格和空行
+5. 即使忘记了结束标签，大多数浏览器也会正确工作，但是尽量不要这样做。
+6. HTML 对大小写不敏感，建议全部用小写
+7. 直接在 tag 中按多个空格是没有效果的
+
+*** HTML 注释
+1. 浏览器会忽略注释，可以利用注释在 HTML 中放置通知和提醒信息
+#+begin_src html
+<! -- This is a comment -->
+<! -- 这是一段注释 -->
+<p>这是一个段落。</p>
+<! -- 记得在此处添加信息 -->
+#+end_src
+2. 条件注释
+#+begin_src html
+<! --[if IE 8]>
+    ... some HTML here ...
+<![endif] -->
+上面的注释定义了只有Internet Explora执行的HTML
+#+end_src
+*** HTML 属性
+1. 类似 Python 中的字典
+2. HTML 可以拥有属性。属性可以包含元素的更多的信息。
+3. 属性总以名称/值对的形式出现，比如 name=”Value“。
+4. 属性总是在 HTML 元素的开始标签中规定
+#+begin_src html
+<h1 align="center">拥有关于对齐方式的附加信息。</h1>
+#+end_src
+5. 属性对于大小写不敏感，但是尽量用小写。
+6. 常用的属性包括： (js)
+| 属性  | 值               | 描述                                     |   |   |
+|-------+------------------+------------------------------------------+---+---|
+| class | classname        | 规定元素的类名（classname)               |   |   |
+| id    | id               | 规定唯一的 id                            |   |   |
+| style | style_definition | 规定元素的行内样式（inline style）       |   |   |
+|  title    | text             | 规定元素的额外信息（可在工具提示中显示） |   |   |
+
+*** 如何在 Emacs 下使用 HTML: 目前阶段
+1. Emacs 自带的 HTML Mode 使用起来并不是那么的方便，而 web-mode 则是一个非常常用也 很强大的用于编辑前端代码的 Major Mode。
+   具体查询位置如下：
+   https://github.com/fxbois/web-mode
+   https://web-mode.org/
+2. 代码 fold 和 unfold C-c C-f
+3. 写好的代码如何执行。
+   目前还没好的办法，考虑到进度问题，目前使用 EWW 来执行，这个是可行的。
+4. 文档自动对齐：
+   M-x web-mode-buffer-indent
+5. 在编辑模式上，按 Command-s 即可打开
+
+*** TODO Org Mode 中的表格操作
+DEADLINE: <2021-01-31 Sun> SCHEDULED: <2021-01-06 Wed>
+1. 表格用 "|" 符号作为列分隔符，而在 Org mode 中，如果某一行文字的 第一个非空白符号 是 "|" 的话，就会被视作是一个表格，而 '-' 符号组成的分隔线之上的部分则被认为是各列的名称(不过列名并不是必须的)。
+2. 一个完整的表格一般是有 header (就是表示列名那一行)的，要有 header 的话就需要 "-" 组成的分隔线，有两种方式可以插入分隔线。
+   一种办法是新起一行，对齐后输入 "|-" ，即一个列分隔附跟一个连字符
+   第二种办法是使用 "C-c -" 这个快捷键来快速插入，
+   https://www.zmonster.me/2016/06/03/org-mode-table.html
+   部分内容留在后面学习
+3. 有点问题: 1.) 制表， 2.org 下的 to-do 有些问题
+
+** HTML 的头部元素<head>
+*** <head>元素
+元素是所有头部元素的容器。这些标签可以添加到 head 部分：<head>, <base>, <link>, <meta>, <script>以及<style>
+*** <title> 元素：定义文档的功能
+title 元素在所有 HTML/XHTML 文档中都是必须的。
+title 元素能够：
+1. 定义浏览器工具栏中的标题
+2. 提供页面被添加到收藏夹时显示的标题
+3. 显示在搜索引擎结果中的页面标题
+*** <meta> 元素: 元数据（metadata）是关于数据的信息
+1. <meta>标签提供关于 HTML 文档的元数据。元数据不会显示在页面上。
+2. meta 元素常被用于规定页面的描述、关键词、文档的作者、最后修改的时间以及其他元素。
+3. <meta>标签始终位于 head 元素中。
+
+#+begin_src html
+<!DOCTYPE html>
+<html lang = 'en'>
+  <head>
+    <meta charset = "UTF-8">//文档字符编码方式，不声明的话可能会乱码
+    <title>apple</title>
+  </head>
+  <body>
+    <hr />
+    <h1 style ="color:red">haha</h1>
+  </body>
+</html>
+
+#+end_src
+*** content 属性：必须的属性
+1. 提供了名称/值对中的值。 该值可以是任何有效的字符串。
+2. 始终要和 name 属性或者 http-quiv 属性一起使用
+3. 类 python 中的键值对，content 是键， 后者是值
+例如
+#+begin_src html
+<meta name="keyword" content="HTML,ASP,PHP,SQL">
+<!-- keywords:HTML, ASP, PHP, SQL-->
+
+#+end_src
+*** http-equiv， name， scheme 属性：可选的属性
+| 属性      | 值          | 描述                                     |
+|-----------+-------------+----------------------------------------|
+| content   | some_text   | 定义与 http-equiv 或 name 属性相关的元信息  |
+| http-quiv | content     | 把 content 属性关联到 HTTP 头部           |
+|           | exprires    |                                        |
+|           | refresh     |                                        |
+|           | set-cookie  |                                        |
+| name      | author      | 把 content 内容属性关联到一个名称           |
+|           | description |                                        |
+|           | keyword     |                                        |
+|           | generator   |                                        |
+|           | revised     |                                        |
+|           | other       |                                        |
+| scheme    | some_text   |  定义用于翻译 content 属性值的格式          |
+
+*** http-equiv 属性：
+1. http-equiv 属性为名称/值对提供了名称。并指示服务器在发送实际的文档之前先要在要传送给浏览器的 MIME 文档头部包含名称/值对。
+2. 当服务器想浏览器发送文档时，会先发送许多名称/值对。虽然有些服务器会发送许多这种名称/值对，但是所有服务器至少要发送一个： content-type：text/html。浙江高速浏览器准备接受一个 HTML 文档。
+3. 使用带有 http-equiv 属性的<meta>标签时，服务器将把名称/值对添加到发送给浏览器的内容头部。例如：添加：
+   <meta http-equiv="charset" content="iso-8859-1">
+   <meta http-equiv="expires" content="31 Dec 2008">
+   这样发送到浏览器的头部就应该包含：
+   content-type: text/html
+   charset:iso-8859-1
+   expires:31 Dec 2008
+   当然，只有浏览器可以接受这些附加的头部字段，并能以适当的方式使用它们时，这些字段才有意义。
+4. 有关 http-equiv 的用法：
+   语法一：
+   #+begin_src html
+   <meta http-equiv="content-language" content="zh-CN"/>
+   content-language为http-equiv属性值，用于标记页面语言，
+   #+end_src
+
+   语法二：
+   #+begin_src html
+   <meta http-equiv="content-type" content="text/html; charset=gb2312"/>
+   content-language为http-equiv属性值，用于标记页面语言，
+   #+end_src
+ 5. 删除过期的 cookie
+    如果网页过期，那么删除存盘的 cookie
+    #+begin_src html
+    <meta http-equiv="set-cookie" content="cookievalue=xxx; expires=Sunday 20 October 2017 12:00 GMT; path="/>
+    #+end_src
+ 6. 设置网页过渡效果
+    当用户进入或者离开网页时呈现不同的效果
+    #+begin_src html
+    <meta http-equiv="page-enter" content="revealtrans(duration=5,transition=1)"/>
+    <meta http-equiv="page-exit" content="revealtrans(duration=5,trasition=1)"/>
+    #+end_src
+    page-enter 表示进入页面时启用特效，page-exit 表示离开页面启用特效，duration 表示持续时间，transition 表示滤镜类型，表示想用哪种效果，取值 0-23
+
+
+*** <base> 元素
+<base>标签为页面上的所有连接规定默认地址或默认目标（target），使用的比较少：
+#+begin_src html
+<head>
+<base href="http://www.baidu.com/images/"/>
+<base target="_blank"/>
+</head>
+#+end_src
+*** <link> 元素
+简单来说类似 python 中的 input，比如网页标签上面的图标等等都能实现, 例如外部的头部文件 css
+#+begin_src html
+<link rel="stylesheet" type="text/css" herf="mystyle.css"/>
+</head>
+#+end_src
+
+#+begin_src html
+<link rel="shortcut icon" href="image/favicon.ico">
+#+end_src
+*** <style> 元素
+用于为 HTML 文档定义样式信息
+#+begin_src html
+<head>
+<style type="text/css">
+body {background-color:yellow}
+p {color:blue}
+</style>
+</head>
+#+end_src
+
+*** <script>元素
+用于设置 Javascript 内容：
+#+begin_src javascript
+<scripr_src="//common.cnblogs.com/script/jquery.js" type="text/javascript"></script>
+#+end_src
+
+导入一个 js 的脚本
+也可以这样写
+#+begin_src javascript
+<script>
+var x = "haha",
+</script>
+#+end_src
+
+** HTML 常用标签
+*** HTML 标题
+标题<heading>，是通过<h1> - <h6>等标签进行定义的。
+默认情况下，HTML 会自动的在块级元素前后添加一个额外的空行，比如段落、标题元素前后
+请确保 h 标签只用于标题。不要仅仅是为了产生粗体或者大号的文本而使用标题。
+搜索引擎使用标题为网页的结构和内容编制索引。对提高搜索命中率很重要。
+用户可以通过标题来快速浏览的网页，所以标题来呈现文档结构是很重要的。
+应该将 h1 用作主标题（最重要的），其后是 h2（此重要的），再其次是 h3，以此类推。
+
+/Notice/:
+块级标签：展示的时候占一整行。典型的块级标签比如 h, p
+行内标签: 占不到一整行。典型的有<span></span>(会以空格的方式把内容放在同一行)
+*** HTML 水平线
+<hr/ > 标签在 HTML 页面中创建水平线。 hr 元素可用于分隔内容。
+*** HTML 段落
+段落是通过<p>标签定义的。浏览器会自动的在段落前后添加空行。
+#+begin_src html
+<p> This is a paragraph </p>
+<p> This is another paragraph </p>
+#+end_src
+*** HTML 换行
+如果想要在不产生一个新段落的情况下进行换行（新行），可以使用<br />标签：
+#+begin_src html
+<p>This is<br />a para<br />graph with line breaks</p>
+#+end_src
+/空白字符：/ &nbsp;
+所有的空格和空行都会被认为一个空格。这是空格的展示方式
+
+*** HTML 超链接：<a> (必须附加协议名)
+超链接可以是一个字，一个词，也可以是一副图像，可以点击这些内容来跳转新的文档。
+或者当前文档中的某个部分。
+当把鼠标指针移动到网页中的某个连接上时，箭头会变为一只小手。
+通过使用<a>标签在 HTML 中创建连接，有两种使用<a>标签的方式：
+- 使用 herf 属性-创建指向另一个文档的连接
+- 使用 name 属性-创建文档的书签
+#+begin_src html
+<a href="url">link text</a>
+#+end_src
+href 属性规定链接的目标。开始标签和结束标签之间的文字被作为超级链接来显示。
+#+begin_src html
+<a herf="http://www.baidu.com/">百度首页</a>
+#+end_src
+使用 Target 属性，可以定义被链接的文件在何处显示。下面的这行会在新的窗口打开：
+#+begin_src html
+<a href="http://www.baidu.com/" target="_blank">百度首页</a>
+#+end_src
+*** HTML 超链接：name 属性
+name 属性规定锚（anchor）的名称，用于创建 HTML 页面中的书签。
+书签不会以任何特殊方式显示，它对读者是不可见的。
+当使用命名锚（named anchors）时，可以创建直接跳至该命名锚（比如页面中某个小节）的链接，
+这样就无需不停的滚动页面来寻找需要的信息了。
+命名锚的语法：
+<a name="label">锚 （显示在页面上的文本）</a>
+1. 锚的名称可以是自定义的名字
+2. 可以使用 id 属性来替代 name 属性，命名锚同样有效。
+举例来说：首先，在 HTML 文档中对锚进行命名（创建一个书签）：
+#+begin_src html
+<a name="tips">基本的注意事项，有用的提示</a>
+#+end_src
+然后，在同一个文档中创建指向该锚的链接：
+#+begin_src html
+<a herf="#tips">有用的提示</a>
+#+end_src
+也可以在其他页面中创建指向该锚的链接：
+#+begin_src html
+<a herf="http://www.xxx.com.cn/xxx.html#tips">有用的提示</a>
+#+end_src
+在代码中，将#符号和锚名称添加到 URL 的末端，就可以直接连接到 tips 这个命名锚了。
+*** TODO HTML 图像：<img />: 研究路径问题
+DEADLINE: <2021-01-31 Sun> SCHEDULED: <2021-01-07 Thu>
+在 HTML 中，图像用<img>标签定义。
+<img>是空标签它只包含属性，并且没有闭合标签。
+要在页面上显示图像，需要使用源属性（src），源属性的值是图像的 URL 地址，定义图像的语法是：
+#+begin_src html
+<img src="url" />
+#+end_src
+*** TODO 替换文本属性（Alt）
+alt 属性用来为图像定义一串预备的可替换的文本，替换文本的属性的值是用户定义的。
+#+begin_src html
+<img src="boat.git" alt="Big Boat" />: 思考，控制图片的长宽？
+#+end_src
+在浏览器无法载入图像时，将显示这个替代性的文本，为页面上的图像加上替换文本属性是个好习惯， 这样有助于更好的显示信息，并且对于那些使用纯文本浏览器的人来说是非常有用的。
+可以和超链接嵌套。
+
+*** HTML 表格：<table>
+表格由<table>标签来定义，每个表格均有若干行，由<tr>标签来定义），每行被分割为若干单元格（由<td>来定义）。数据单元格可以包含文本、图片、列表、段落、表单、水平线、表格等等。
+表格的表头使用<th>标签进行定义。大多数浏览器都会把表头显示为粗体剧中的文本：
+可以使用<td>&nbsp;</td>对无内容的单元格占格显示。
+#+begin_src html
+<table border="1">
+<tr>
+  <td>row 1, cell 1</td>
+  <td>row 1, cell 2</td>
+</tr>
+<tr>
+  <td>row 2, cell 1</td>
+  <td>row 2, cell 2</td>
+</tr>
+</table>
+#+end_src
+<table border="1">可显示边框。 目前比较好理解的方式是<thead></thead>, <tbody></tbody>, <tfoot></tfoot>
+生成不规则的表格，有专门的插件，这个有问题再查询。
+
+*** HTML 列表
+1. 无序列表：基本就用这一种
+   无序列表是一个项目的列表，此列表使用粗体圆点（典型的小黑圆圈）进行标记
+   无序列表始于<ul>标签，每个列表项始于<li>
+   #+begin_src html
+   <ul>
+    <li>Coffee</li>
+    <li>Milk</li>
+   </ul>
+   #+end_src
+   列表中可以包含段落、换行符、图片、链接以及嵌套列表等等
+2. 有序列表
+   同样有序列表
+   #+begin_src html
+   <ol>
+    <li>Coffee</li>
+    <li>Milk</li>
+   </ol>
+   #+end_src
+
+   </ol>
+3. 自定义列表
+   #+begin_src html
+   <dl>
+    <dt>Coffee</dt>
+    <dd>Black hot drink</dd>
+    <dt>Milk</dt>
+    <dd>White cold drink</dd>
+   </dl>
+   #+end_src
+
+*** HTML <dir> 和 <span>
+可以通过<dir>和<span>将 HTML 元素组合起来
+块级元素和内联元素
+块级元素翻译自"block level element", 内联元素源于"inline element"
+块级元素在浏览器显示时，通常会以新行来开始（和结束）
+例如:<h1>, <p>, <ul>, <table>
+内联元素在显示时通常不会以新航开始
+例如：<b>, <td>, <a>, <img>
+*<div>*
+1. 是最重要的块级元素，它是可以用于组合其他 HTML 元素的容器。
+2. 没有特定的含义，如果与 CSS 一同使用，<div>可用于对大的内容设置样式属性
+3. 常见的用途是文档布局
+
+*<span>*
+1. 是内联元素，可用作文本的容器。
+2. 也没有特定的定义
+3. 当与 CSS 一同使用时， <span>可用于为部分文本设置样式属性。
+
+#+begin_src html
+<body>
+
+<div id="header">
+<h1>City Gallery</h1>
+</div>
+
+<div id="nav">
+London<br>
+Paris<br>
+Tokyo<br>
+</div>
+
+<div id="section">
+<h1>London</h1>
+<p>
+London is the capital of England. It is the most populous city in the United Kindom, with a metroplitan area of over 13 million inhabitors.
+</p>
+<p>
+Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its fouding by the Romans, who named it Londinium.
+</p>
+</div>
+
+<div id="footer">
+Copyright W3School.com.cn
+</div>
+
+</body>
+#+end_src
+
+#+begin_src html
+<style>
+#header{
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav{
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+#section{
+    width:350px;
+    float:left;
+    padding:10px;
+}
+#footer{
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px
+}
+</style>
+#+end_src
+
+** HTML 表单
+*** <form>元素
+表单用于手机用户输入，<form>元素定义表单：
+表单包含不同的表单元素。
+表单元素指的是不同类型的 input 元素、复选框、单选按钮、提交按钮等等。
+<form>标签框定了表单的整体框架
+#+begin_src html
+.
+form elements
+.
+#+end_src
+<input>元素
+<input>元素有很多形态，根据不同的 type 属性，例如， text， radio， checkbox 等等。
+
+*** form 的 Action 属性
+action 属性定义在提交表单的动作，向服务器提交表单的通常做法是使用提交按钮。通常，表单会被提交到 web 服务器上。在上面的例子总，制定了某个服务器脚本来处理被提交表单：
+<form action="action_page.html">
+如果省略 action 属性，则 action 会被设置为当前页面
+
+*** form 的 Method 属性
+methon 属性规定在提交表单时所用的 HTTP 方法（GET 或 POST）：
+1. 何时使用 GET？
+   GET（默认方法），如果表单提交是被动的，（比如搜索引擎查询），并没有敏感信息的时候可以使用 GET。
+   使用 GET 的死后，表单数据在页面地址栏是可见的：
+   action_page.php?firstname=Mickey&lastname=Mouse
+   注释：GET 适合少量不敏感数据的提交，浏览器会设定容量限制
+2. 何时使用 POST？
+   如果表单正在更新数据，或者包含敏感信息（例如密码）。
+   POST 的安全性更好，因为在页面地址栏中被提交的数据是不可见的。
+3. 但是 POST 还是有可能被劫包的，所以需要解决根本问题，就需要通过https:// 来替代http:// 通常只有大型网站经过认证才有 https
+#+begin_src html
+<form action="/login/" method="post">
+    <input type="text" />
+#+end_src
+
+*** form 的 Name 属性：
+如果要正确被提交，每个输入字段必须设置一个 name 属性。
+例如下面的例子只会提交“Last name”输入字段：
+#+begin_src html
+<form action="action_page.php">
+Fisrt name:<br>
+<input type="text" value="Micky">
+<br>
+Last name:<br>
+<input type="text" name="lastname" value="Mouse">
+<br><br>
+<input type="submit" value="Submit">
+</form>
+#+end_src
+
+*** input 的文本输入：
+1. =<input type="text">=定义用于文本输入的单行输入字段：
+   注意：表单本身不可见。
+2. 单选按钮输入
+   =<input type="radio">= 定义单选按钮
+   单选按钮允许用户在数量的选项中选择其中之一：比如下方男性女性中选其一，其中 name 属性决定了两个单选框是一组的，
+   *Male* *Female*是显示在页面上的，真正后台得到的值是 value 里面来的
+   checked 决定默认值
+   #+begin_src html
+   <form>
+   <input type="radio" name="sex" value="male" checked />Male
+   <br>
+   <input type="radio" name="sex" value="female" />Female
+   </form>
+   #+end_src
+3. 复选框：checkbox, 预先选上也是 checked
+   =<input type="checkbox">=定义复选框。
+   复选框允许用户在有限数量的选项中选择零个或多个选项
+   #+begin_src html
+   <form>
+   <input type="checkbox" name="vehicle" value="Bike" />I have a bike
+   <br>
+   <input type="checkbox" name="vehicle" value="Car" />I have a car
+   </form>
+   #+end_src
+4. <select>元素（下拉列表）
+   #begin_src html
+   <select name="cars">
+   <option value="Volvo">Volvo</option>
+   <option value="Saab">Saab</option>
+   <option value="Flat">Flat</option>
+   <option value="Audi">Audi</option>
+   </select>
+   #+end_src
+   <option>元素定义待选择的选项。通常会把首个选项显示为被选选项。
+   可以通过添加 selected 属性来预定义选项。
+   =<option value="Flat" selected>FLat</option>=
+
+   select 还有一个 multiply 选项，可以支持多选，可以同时选 3 个（如下）
+   =<select name="cars" multiple size="3">=
+   select 发送到后台的数据是标签中设定的 name：value 的键值对，而不是页面实际展示的文本。
+4. <textarea>元素，比如让人写评论
+   定义多行输入字段（文本域）：文本输入框，
+   #+begin_src html
+   <textarea name="message" row="10" cols="30">
+   The cat was playing in the garden.
+   </textarea>
+   #+end_src
+   控制行列属性可以通过查表的方式 www.w3school.com.cn/tags/tag_textarea.asp
+5. 输入类型：password
+   =<input type="password">=定义密码字段
+   #+begin_src html
+   <form>
+   User name:<br>
+   <input type="text" name="username">
+   <br>
+   User password:<br>
+   <input type="password" name="psw">
+   </form>
+   #+end_src
+   以上 HTML 代码在密码处会被做遮掩处理
+6. 上传文件：file
+   用于向服务器传送文件。需要在 form 标签里添加 enctype=“multipart/form-data”属性。
+   =<input type="file" name="upload">=
+7. 邮件地址 email
+   用于提交邮箱地址。必须加入 enctype
+   #+begin_src html
+   <form action="/login/" method="post" enctype='multipart/form-data'>
+   <span>mailaddress:</span>
+   <input type="email" name="email" />
+   </form>
+   #+end_src
+   浏览器会对这些类型的 input 进行输入检查，但是一些低版本的浏览器可能不支持这些 type
+8. reset 重置
+   重制 form 表单哪所有输入，表单外的无影响
+   =<input type="reset" name="重置" />
+9. 提交按钮 submit
+   定义于向表单处理程序（form-handler）提交表单的按钮。
+   表单处理程序通常是包含用来处理输入数据的脚本的服务器页面。
+   表单处理程序在表单的 action 属性中指定：
+   #+begin_src html
+   <form action="action_page.php">
+   First name:<br>
+   <input type="text" name="firstname" value="Mickey">
+   <br>
+   Last name:<br>
+   <input type="text" name="lastname" value="Mouse">
+   <br><br>
+   <input type="submit" value="提交">
+   </form>
+   #+end_src
+   提交时，会将 input 框的 name 和实际内容组合成字典的形式发送到服务器。例如：
+   #+begin_src python
+   {
+    "firstname":"jack"
+    "lastname":"china"
+   }
+   #+end_src
+
+   举例：可以直接做在自己的页面里进行搜索，wd 是百度规定的参数名 wd 作为键盘, 搜索内容作为值
+   #+begin_src html
+   <!DOCTYPE html>
+   <html lang="en">
+     <head>
+       <meta charset="UTF-8">
+       <title></title>
+     </head>
+   <body>
+
+   <form action="http://www.baidu.com/s" method="get">
+   关键字：
+       <input type="text" name="wd" />
+       <input type="submit" value="搜索" />
+   </form>
+   </body>
+   </html>
+   #+end_src
+10. input 的<button>按钮
+    <button>元素定义可点击的按钮：
+    #+begin_src html
+    <input type="reset", value="重置" />
+    <input type="submit", value="提交" />
+    <button typ="submit", value="提交" />
+    <button type="submit" onclick="alert('Hello World!')">Click Me!</button>
+    #+end_src
+11. hidden: 隐藏功能
+*** 表单的输入限制
+1. disabled: 规定输入字段应该被禁用。
+2. max： 规定输入字段的最大值。
+3. maxlength： 规定输入字段的最大字符数。
+4. min: 规定输入字段的最小值。
+5. pattern： 规定通过其检查输入值的正则表达式。
+6. readonly： 规定输入字段为只读（无法修改）。
+7. required： 规定输入字段是必须的（必须填写）。
+8. size：规定输入字段的宽度（以字符计）。
+9. step: 规定输入字段的合法数字间隔。
+10. value： 规定字段的默认值。
+#+begin_src html
+<form>
+ quantity:
+ <input type="number" name="points" min="0" max="100" step="10" value="30">
+</form>
+#+end_src
+*** HTML 字符实体
+在 HTML 中，某些字符是预留的。如果希望能正确的显示预留字符，必须在 HTML 源代码中使用字符实体（charater entitles）。
+字符实体类似这样
+&entity_name; 或者 &#entity_number;
+例如需要显示小于号，必须这样写： &lt; &#60;
+提示：使用实体名而不是数字的好处是名称易于记忆。不过坏处是浏览器也许并不支持所有实体名称（对实体数字的支持却很好）
+*** 不间断空格（non-breaking space）
+HTML 中的常用字符实体是不间断空格（&nbsp)
+浏览器总是会截断 HTML 页面中的空格。如果在文本中写 10 个空格，在显示该页面之前，浏览器会删除它们中的 9 个，如需要在页面中增加空格的数量，需要使用&nbsp;字符实体
+   #+begin_src ditaa: file images/HTML_table
+   #+end_src
+
+** Org-Mode 操作技巧
+*** TODO Emacs
+DEADLINE: <2021-05-31 Mon> SCHEDULED: <2021-01-08 Fri>
+1. 文本处理基本操作
+   *bold*
+   /italic/
+   +strike-through+
+   =inline code=
+2. 链接与图片
+   两层[[][]]来插入超链接  [[http://www.baidu.com][Title]]
+   图片和链接类似，直接输入图片的完整地址即可
+3. 在 orgmode 里面做表格处理, C-c }可以开启行符, 按 C-c C-c
+   | year | Revenue |
+   |------+---------|
+   | 2017 | 1500000 |
+   | 2018 | 3000000 |
+   | 2019 | 6000000 |
+   |------+---------|
+   |  Sum |         |
+   #+TBLFM： @5$2=vsum(@2..@-1)
+
+   可以使用-calc， elisp 的函数功能
+4. 编写技术文档：a.k.a. Jupyter Notebook, 可以使用 C-c C-c 来运行
+#+Begin_src python
+def my_sum(r):
+    sum = 0
+    for i in range(r):
+        sum += i
+    return sum
+
+return my_sum(100)
+#+End_src
+
+#+RESULTS:
+: 4950
+5. 支持绘图，a.k.a. Omni Graffle
+   使用 ditaa， homebrew 可以直接安装  需要研究！ C-c C-c 来执行
+   #+begin_src ditaa: file images/chart.png
+
+   #+end_src
+6. 画图软件 graphviz/dot 用的也比较多
+   - =artist_mode=
+   - =picture_mode=
+7. 任务管理
+   - Getting things dome
+   + =Org-capture     C-c C-c / 打开 Agenda 查看 TODO
+8. 直接查看 pdf，可以导出很多格式。
+   #+OPTIONS: toc:nil
+9. 导出幻灯片，
+   #+BEAMER_THEME： Boadilla
