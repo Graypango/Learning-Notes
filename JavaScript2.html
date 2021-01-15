@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>throw功能测试</h1>
+    <input id="demo" type ="text" />
+    <p>请输入一个介于5到10之间的数字</p>
+    <button onclick="myFunc();">测试</button>
+    <p id="message" style="color:red;"></p>
+    <script>
+     var tag=document.getElementById("message");
+     function myFunc(){
+       try{
+         var x=document.getElementById('demo').value;
+         if (x=="")throw "输入的是空值";
+         if (isNaN(x)) throw "输入的不是数字";
+         if (x>10) throw "值大于10";
+         if (x<5) throw "值小于5";
+         tag.innerHTML=""  //用于去除原来出错的信息
+       }catch(err){
+         tag.innerHTML="输入错误，原因是："+err;
+       }
+     }
+    </script>
+
+    <p id="intro">Hello <a href="https://www.baidu.com">baidu</a>World!</p>
+    <script>
+     var txt=document.getElementById("intro");
+     console.log(tag.innerHTML);
+     console.log(tag.nodeName);
+     cosole.log(tag.nodeValue);
+     cosole.log(tag.nodeType);
+     var textnode=txt.firstChild;
+     console.log(textnode.innerHTML);
+     console.log(textnode.nodeName);
+     cosole.log(textnode.nodeValue);
+     cosole.log(textnode.nodeType);
+    </script>
+
+  </body>
+</html>
