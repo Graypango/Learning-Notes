@@ -1067,3 +1067,227 @@ year
 2020  1014   169  198  127
 2021   142   142  142  142
 #+end_example
+** 案例 5 关联分析
+#+begin_src python :results output
+import pandas as pd
+import numpy as np
+
+left = pd.DataFrame(
+    {
+        'name': ['white','black','red','green','yellow'],
+        'stu_id': [1,2,3,4,5],
+        'class_id' : [1,3,1,3,2]
+    }
+)
+
+
+right = pd.DataFrame(
+    {
+        'class_id':[1,2,3,4],
+        'class_name':['lufi','whitebeard','redhari','beast']
+    }
+)
+
+
+'''
+left
+right
+inner
+outer
+'''
+res1 = pd.merge(left,right, how='left')  # 左关联
+print(res1)
+res2 = pd.merge(left,right, how='right') # 右关联
+print(res2)
+res3 = pd.merge(left,right, how='inner') # 内关联
+print(res3)
+res4 = pd.merge(left,right, how='outer') # 全关联
+print(res4)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+     name  stu_id  class_id  class_name
+0   white       1         1        lufi
+1   black       2         3     redhari
+2     red       3         1        lufi
+3   green       4         3     redhari
+4  yellow       5         2  whitebeard
+     name  stu_id  class_id  class_name
+0   white     1.0         1        lufi
+1     red     3.0         1        lufi
+2  yellow     5.0         2  whitebeard
+3   black     2.0         3     redhari
+4   green     4.0         3     redhari
+5     NaN     NaN         4       beast
+     name  stu_id  class_id  class_name
+0   white       1         1        lufi
+1     red       3         1        lufi
+2   black       2         3     redhari
+3   green       4         3     redhari
+4  yellow       5         2  whitebeard
+     name  stu_id  class_id  class_name
+0   white     1.0         1        lufi
+1     red     3.0         1        lufi
+2   black     2.0         3     redhari
+3   green     4.0         3     redhari
+4  yellow     5.0         2  whitebeard
+5     NaN     NaN         4       beast
+#+end_example
+** 案例 5.1
+#+begin_src python :results output
+import pandas as pd
+import numpy as np
+
+left = pd.DataFrame(
+    {
+        'name': ['white','black','red','green','yellow'],
+        'stu_id': [1,2,3,4,5],
+        'class_id1' : [1,3,1,3,2]
+    }
+)
+
+
+right = pd.DataFrame(
+    {
+        'class_id2':[1,2,3,4],
+        'class_name':['lufi','whitebeard','redhari','beast']
+    }
+)
+
+
+'''
+left
+right
+inner
+outer
+'''
+res1 = pd.merge(left,right, how='left', left_on='class_id1', right_on='class_id2')  # 左关联
+print(res1)
+#res2 = pd.merge(left,right, how='right') # 右关联
+#print(res2)
+#res3 = pd.merge(left,right, how='inner') # 内关联
+#print(res3)
+#res4 = pd.merge(left,right, how='outer') # 全关联
+#print(res4)
+#+end_src
+
+#+RESULTS:
+:      name  stu_id  class_id1  class_id2  class_name
+: 0   white       1          1          1        lufi
+: 1   black       2          3          3     redhari
+: 2     red       3          1          1        lufi
+: 3   green       4          3          3     redhari
+: 4  yellow       5          2          2  whitebeard
+
+** 案例 6 交叉分析(透视表)
+#+begin_src python :results output
+'''
+透视表：本质就是对数据进行分组聚合
+'''
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame(
+    {
+        'stu_id' : np.arange(1,11),
+        'stu_name': [chr(x) for x in range (65, 75)],
+        'gender' : ['F','M','F','M','F','F','M','M','F','F'],
+        'age' : np.random.randint(18,25,10),
+        'score' : np.random.randint(60,100,10)
+    }
+)
+print(df)
+#查看男生和女生的总分
+print('--------------------------------------------------')
+print(df.pivot_table(index=['gender'],  aggfunc=['sum']))
+print('--------------------------------------------------')
+print(df.pivot_table(index=['gender'], values=['score'], aggfunc=['sum']))
+print('--------------------------------------------------')
+print(df.pivot_table(index=['gender'], values=['score','age'], aggfunc={'score':'sum', 'age':'max'}))
+print('--------------------------------------------------')
+print(df.pivot_table(index=['gender', 'age'], values=['score'], aggfunc=['sum']))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+   stu_id stu_name gender  age  score
+0       1        A      F   21     86
+1       2        B      M   19     73
+2       3        C      F   19     87
+3       4        D      M   22     64
+4       5        E      F   19     70
+5       6        F      F   19     79
+6       7        G      M   20     88
+7       8        H      M   20     79
+8       9        I      F   19     76
+9      10        J      F   22     84
+--------------------------------------------------
+        sum
+        age score stu_id
+gender
+F       119   482     34
+M        81   304     21
+--------------------------------------------------
+         sum
+       score
+gender
+F        482
+M        304
+--------------------------------------------------
+        age  score
+gender
+F        22    482
+M        22    304
+--------------------------------------------------
+             sum
+           score
+gender age
+F      19    312
+       21     86
+       22     84
+M      19     73
+       20    167
+       22     64
+#+end_example
+** 案例分析 7 相关分析
+#+begin_src python :results output
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame(
+    {
+        'stu_id' : np.arange(1,11),
+        'stu_name': [chr(x) for x in range (65, 75)],
+        'gender' : ['F','M','F','M','F','F','M','M','F','F'],
+        'age' : np.random.randint(18,25,10),
+        'score' : np.random.randint(60,100,10)
+    }
+)
+
+print(df[['age','score']].corr())
+res = df.groupby(['gender'])['score'].agg(['sum','max','min'])
+print(res)
+print(res.corr())
+print(df.groupby('age')['score'].agg(['sum','mean','max','min']).corr())
+#+end_src
+
+#+RESULTS:
+#+begin_example
+            age     score
+age    1.000000 -0.207236
+score -0.207236  1.000000
+        sum  max  min
+gender
+F       419   97   61
+M       314   96   62
+     sum  max  min
+sum  1.0  1.0 -1.0
+max  1.0  1.0 -1.0
+min -1.0 -1.0  1.0
+           sum      mean       max       min
+sum   1.000000  0.172430  0.446211 -0.189909
+mean  0.172430  1.000000  0.904495  0.880069
+max   0.446211  0.904495  1.000000  0.593824
+min  -0.189909  0.880069  0.593824  1.000000
+#+end_example
