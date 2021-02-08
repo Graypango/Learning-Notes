@@ -1,0 +1,50 @@
+#+TITLE: Django Basic
+
+* 简介
+https://www.liujiangblog.com/course/django/
+2.2 内容， 18 年版本
+https://www.liujiangblog.com/blog/36/
+开发流程
+1. 开始编写一个新的 web 应用
+2. 开始编写另一个 web 应用
+3. 从第一部中总结经验运用到了第二部中
+4. 重构代码使得能在第二应用中使用的第一个程序中的通用代码
+5. 重复 2-4 步若干次
+6. 发明一个 web 框架
+
+使用 MVC 设计模式： Model, View, Controller
+MTV 设计模式： Model, Template, View
+* 安装
+** 安装 django，确认 django-admin 能够使用，在 terminal 中创建项目
+=django-admin startproject mysite=
+=python manage.py runserver=
+浏览器输入： http://127.0.0.1:8000
+端口设置: 0.0.0.0 局域网能访问
+需要在 settings -> allowed_hosts = ['192.168.1.100', '*']，来允许局域网中访问
+
+** pycharm 下创建
+* Project1: Mysite1 网络投票
+1. 让公众用户进行投票和查看投票结果的网站
+2. 让网站后台管理员进行增删改查的管理界面
+** 创建 app
+ =python manage.py startapp polls=
+** 输入代码
+** 执行 polls
+http://0.0.0.0:8000/polls/
+** python manage.py migrate
+迁移 app 至 sqlite 数据库下
+* 数据库操作步骤
+** 在 model.py 中修改模型
+通过 settings 增加 app，然后迁移
+** python manage.py makemigrations
+** python manage.py migrate
+** python manage.py sqlmigrate polls 0001
+查看数据库语句详细
+
+* 进入 python shell 环境
+=python manage.py shell=
+=from polls.models import Question, Choice=
+* 创建特权用户
+=python manage.py createsuperuser=
+登陆 0.0.0.0:8000/admin 下
+* 视图和模版
